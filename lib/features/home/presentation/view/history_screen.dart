@@ -184,9 +184,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                             fontSize: 14,
                                           ),
                                         ),
-                                        onTap: () {
-                                          controller.deleteHistory(
-                                              index: index, id: entry.id);
+                                        onTap: () async {
+                                          bool shouldDelete = await Utility
+                                              .showCustomConfirmationDialog(
+                                                  context,
+                                                  message:
+                                                      'Are you sure you want to delete this entry?');
+                                          if (shouldDelete) {
+                                            controller.deleteHistory(
+                                                index: index, id: entry.id);
+                                          }
                                           Navigator.of(context).pop();
                                         },
                                       ),

@@ -190,7 +190,7 @@ class HomeController extends GetxController {
     if (currencyCount.isNotEmpty) {
       await databaseService.insertDenomination(
         totalAmount,
-        remark,
+        remark.trim(),
         category,
         DateTime.now(),
         currencyCount,

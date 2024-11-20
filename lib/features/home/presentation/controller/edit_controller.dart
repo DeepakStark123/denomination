@@ -104,7 +104,7 @@ class EditController extends GetxController {
     await databaseService.updateDenomination(
       editingEntryId,
       totalAmount,
-      remark,
+      remark.trim(),
       category,
       DateTime.now(),
       currencyCount,
