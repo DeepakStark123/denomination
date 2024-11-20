@@ -1,6 +1,7 @@
 import 'package:denomination/database/database_service.dart';
 import 'package:denomination/features/home/presentation/controller/history_controller.dart';
 import 'package:denomination/features/splash/presentation/controller/splash_controller.dart';
+import '../../features/home/presentation/controller/edit_controller.dart';
 import '../../features/home/presentation/controller/home_controller.dart';
 import 'package:denomination/features/splash/service/splash_service.dart';
 import 'package:denomination/features/home/services/home_service.dart';
@@ -25,5 +26,6 @@ class Dependencies extends Bindings {
           databaseService: Get.find<DatabaseService>()),
       fenix: true,
     );
+    Get.lazyPut<EditController>(() => EditController(Get.arguments));
   }
 }

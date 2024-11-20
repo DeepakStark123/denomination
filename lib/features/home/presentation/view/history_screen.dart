@@ -1,5 +1,6 @@
 import 'package:denomination/config/colors.dart';
 import 'package:denomination/config/utility.dart';
+import 'package:denomination/core/routes/app_routes.dart';
 import 'package:denomination/core/textTheme/text_theme.dart';
 import 'package:denomination/widgets/empty_data.dart';
 import 'package:denomination/widgets/loading_widget.dart';
@@ -146,8 +147,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                             fontSize: 14,
                                           ),
                                         ),
-                                        onTap: () {
-                                          Navigator.of(context).pop();
+                                        onTap: () async {
+                                          var result = await Get.toNamed(
+                                            AppRoutes.edit,
+                                            arguments: entry,
+                                          );
+                                          if (result == true) {
+                                            historyController.loadHistory();
+                                          }
                                         },
                                       ),
                                     ),

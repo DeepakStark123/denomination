@@ -49,28 +49,32 @@ class HomeController extends GetxController {
     update();
   }
 
+  // Formats number
   String formatNumber(int number) {
     final formatter = NumberFormat('#,##0', 'en_IN');
     return formatter.format(number);
   }
 
+  // Formats number in words
   String formatInWords(int number) {
     if (number == 0) return '';
     return '${NumToWords.convertNumberToIndianWords(number)} only/-';
   }
 
+  // Toggle Floating action button
   void toggleExtendedButtons() {
     showExtendedButtons = !showExtendedButtons;
     update();
   }
-  
-   void disableExtendedButtons() {
+
+  // Toggle False to Floating action button
+  void disableExtendedButtons() {
     showExtendedButtons = false;
     update();
     Get.toNamed(AppRoutes.history);
   }
 
-
+  // Clear all fields data
   void clearAllFields() {
     for (var denomination in denominations) {
       denomination.controller.clear();
@@ -78,6 +82,7 @@ class HomeController extends GetxController {
     updateTotalAmount();
   }
 
+ // Show dialod for save data 
   void showSaveDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -171,6 +176,7 @@ class HomeController extends GetxController {
     );
   }
 
+  // Saves the data entry in database.
   Future<void> saveDenominations() async {
     debugPrint('saveDenominations called');
     Map<String, int> currencyCount = {};

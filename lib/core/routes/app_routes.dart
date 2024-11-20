@@ -1,3 +1,4 @@
+import 'package:denomination/features/home/presentation/view/edit_screen.dart';
 import 'package:denomination/features/home/presentation/view/history_screen.dart';
 import 'package:denomination/features/home/presentation/view/home_screen.dart';
 import 'package:denomination/core/routes/route_name.dart';
@@ -8,6 +9,7 @@ class AppRoutes {
   static const splash = RouteName.splash;
   static const home = RouteName.home;
   static const history = RouteName.history;
+  static const edit = RouteName.editScreen;
 
   static List<GetPage> routes = [
     // Splash Route
@@ -24,6 +26,11 @@ class AppRoutes {
     GetPage(
       name: history,
       page: () => const HistoryScreen(),
+    ),
+    // Edit Route
+    GetPage(
+      name: edit,
+      page: () => EditScreen(editingEntry: Get.arguments),
     ),
   ];
 }

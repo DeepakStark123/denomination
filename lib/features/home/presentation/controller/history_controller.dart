@@ -11,6 +11,7 @@ class HistoryController extends GetxController {
   final DatabaseService databaseService;
   final HomeService homeService;
   HistoryController({required this.databaseService, required this.homeService});
+
   var history = <HistoryModel>[];
   bool isLoading = false;
 
@@ -20,14 +21,18 @@ class HistoryController extends GetxController {
     loadHistory();
   }
 
-  setLoading(bool val){
+  // Sets the loading state and updates the UI.
+  void setLoading(bool val) {
     isLoading = val;
     update();
   }
 
+  // Loads the history data from the database.
   void loadHistory() async {
     setLoading(true);
     final historyData = await databaseService.getDenominations();
+
+    // Convert the fetched data to HistoryModel
     history = historyData
         .map((entry) => HistoryModel(
               id: entry[DatabaseConstants.columnId],
@@ -39,38 +44,39 @@ class HistoryController extends GetxController {
                   entry[DatabaseConstants.columnCurrencyCount])),
             ))
         .toList();
+
     setLoading(false);
     update();
   }
 
+  // Converts a currency count string to Map<String, int>.
   Map<String, int> _convertStringToMap(String currencyCountStr) {
     if (currencyCountStr.isEmpty) {
       return {};
     }
-    // Remove the braces `{}` from the start and end
+
     String trimmedStr =
         currencyCountStr.substring(1, currencyCountStr.length - 1);
-    // Split by ', ' to get key-value pairs
     List<String> keyValuePairs = trimmedStr.split(', ');
-    // Create the map by processing each key-value pair
+
     Map<String, int> result = {};
     for (String pair in keyValuePairs) {
       List<String> keyValue = pair.split(': ');
       if (keyValue.length == 2) {
-        result[keyValue[0]] =
-            int.tryParse(keyValue[1]) ?? 0; 
+        result[keyValue[0]] = int.tryParse(keyValue[1]) ?? 0;
       }
     }
     return result;
   }
 
+  // Deletes a history entry by its index and ID.
   void deleteHistory({required int index, required int id}) async {
-    // final historyEntry = history[index];
     await databaseService.deleteDenominationById(id);
     history.removeAt(index);
     update();
   }
 
+  // Shares the details of a given history entry using the Share plugin.
   void shareHistory(HistoryModel entry) {
     StringBuffer summaryBuffer = StringBuffer();
     summaryBuffer.writeln("Denomination");
@@ -80,7 +86,7 @@ class HistoryController extends GetxController {
         "Date: ${DateFormat('dd-MMM-yyyy hh:mm a').format(entry.date)}");
     summaryBuffer.writeln("-------------------------------------");
     summaryBuffer.writeln("Rupee x Counts = Total");
-    // Assuming entry contains detailed denominations data
+
     for (var currency in entry.currencyCount.entries) {
       summaryBuffer.writeln(
           "₹ ${currency.key} x ${currency.value} = ₹ ${int.parse(currency.key) * currency.value}");
@@ -92,7 +98,7 @@ class HistoryController extends GetxController {
         "Grand Total Amount: ₹ ${NumberFormat('#,##0', 'en_IN').format(entry.amount)}");
     summaryBuffer.writeln(
         "${NumToWords.convertNumberToIndianWords(entry.amount)} only/-");
-
+    // Shares the complete summary as a string.
     Share.share(summaryBuffer.toString());
   }
 }
