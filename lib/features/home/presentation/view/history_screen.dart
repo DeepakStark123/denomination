@@ -194,7 +194,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                             controller.deleteHistory(
                                                 index: index, id: entry.id);
                                           }
-                                          Navigator.of(context).pop();
+                                          Get.back();
                                         },
                                       ),
                                     ),
