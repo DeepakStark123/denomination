@@ -28,13 +28,9 @@ A Flutter application designed to simplify cash denomination calculations and ma
 - Use the **Save** button to securely store calculations.
 - Access saved records via the floating **History** button for easy navigation.
 
-### 5. **Dark-Themed User Interface**
-- Minimalistic and professional dark theme for enhanced usability.
-- Floating action buttons for quick access to frequently used features.
-
-### 6. **Media Player Integration**
-- Embedded media player, potentially for voice notes or other transaction-related instructions.
-- Play, pause, and navigate through recordings seamlessly.
+### 6. **Share Receipts**
+Share task details as receipts in text format via supported apps (e.g., messaging apps, email).
+Export detailed receipts as images or text, ensuring clear communication.
 
 ---
 
@@ -42,7 +38,7 @@ A Flutter application designed to simplify cash denomination calculations and ma
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/denomination_app.git
+   git clone https://github.com/DeepakStark123/denomination.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -72,8 +68,6 @@ A Flutter application designed to simplify cash denomination calculations and ma
 
 - **Cloud Backup and Sync:** Add cloud storage to sync data across devices.
 - **Search and Filter in History:** Enable quick lookup of saved records based on date, category, or amount.
-- **Multi-Language Support:** Support for multiple languages to cater to diverse users.
-- **Export Feature:** Export transaction records as CSV or PDF files.
 - **Custom Denominations:** Allow users to add custom currency denominations.
 
 ---
