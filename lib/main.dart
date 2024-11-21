@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize DatabaseService 
-  await DatabaseService().database;
+  await DatabaseService().database; // Initialize Db 
   runApp(const MyApp());
 }
 
